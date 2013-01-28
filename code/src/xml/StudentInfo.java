@@ -326,6 +326,6 @@ public class StudentInfo
 
 	public String toString()
 	{
-		return this.myClassID + ", Gropu " + this.myGroup;
+		return this.myClassID + ", Group " + this.myGroup;
 	}
 }
