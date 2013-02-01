@@ -3,6 +3,9 @@ package screen;
 import takerow.Attendance;
 import xml.StudentInfo;
 import xml.XML_Creator;
+import net.rim.device.api.command.Command;
+import net.rim.device.api.command.CommandHandler;
+import net.rim.device.api.command.ReadOnlyCommandMetadata;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.MenuItem;
@@ -68,38 +71,44 @@ public class TakeRowManuallyScreen extends MainScreen implements FieldChangeList
 		this.myStudentIDField = new LabelField();
 		this.myStatusField = new LabelField();
 
-		this.myTakeRowAllMI = new MenuItem( new StringProvider("Take Row to all Students"), 0x330010, 0 )
+		this.myTakeRowAllMI = new MenuItem( new StringProvider("Take Row to all Students"), 0x330010, 0 );
+		this.myTakeRowAllMI.setCommand( new Command( new CommandHandler()
 		{
-			public void run()
+			//public void run()
+			public void execute(ReadOnlyCommandMetadata metadata, Object context)
 			{
 				if( Dialog.YES == getAnswer() )
 				{
 					initAllStudentsList();
 				}
 			}
-		};
+		}));
 
-		this.myTakeRowOnlyMissedMI = new MenuItem( new StringProvider("Take Row to missed students"), 0x330020, 1 )
+		this.myTakeRowOnlyMissedMI = new MenuItem( new StringProvider("Take Row to missed students"), 0x330020, 1 );
+		this.myTakeRowOnlyMissedMI.setCommand( new Command( new CommandHandler()
 		{
-			public void run()
+			//public void run()
+			public void execute( ReadOnlyCommandMetadata metadata, Object context )
 			{
 				if( Dialog.YES == getAnswer() )
 				{
 					initMissedStudentsList();
 				}
 			}
-		};
+		}));
 
-		this.myTakeRowNoDeviceMI = new MenuItem( new StringProvider("Take Row to students with no device"), 0x330030, 2 )
+		this.myTakeRowNoDeviceMI = new MenuItem( new StringProvider("Take Row to students with no device"), 0x330030, 2 );
+		this.myTakeRowNoDeviceMI.setCommand( new Command( new CommandHandler()
 		{
-			public void run()
+			//public void run()
+			public void execute( ReadOnlyCommandMetadata metadata, Object context)
 			{
 				if( Dialog.YES == getAnswer() )
 				{
 					initNoDeviceStudentsList();
 				}
 			}
-		};
+		}));
 
 		this.myStudentList.setChangeListener( this );
 		this.myAttendedButton.setChangeListener( this );
