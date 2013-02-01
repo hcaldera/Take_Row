@@ -7,6 +7,9 @@ import xml.StudentInfo;
 import xml.XML_Parser;
 import xml.XML_Creator;
 
+import net.rim.device.api.command.Command;
+import net.rim.device.api.command.CommandHandler;
+import net.rim.device.api.command.ReadOnlyCommandMetadata;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.MenuItem;
@@ -44,9 +47,11 @@ public class RegisterDeviceScreen extends MainScreen implements FieldChangeListe
 		this.myMsgField2 = new LabelField();
 		this.myChangesMade = false;
 		
-		this.mySaveChangesMI = new MenuItem( new StringProvider("Save Changes"), 0x330010, 0 )
+		this.mySaveChangesMI = new MenuItem( new StringProvider("Save Changes"), 0x330010, 0 );
+		this.mySaveChangesMI.setCommand( new Command( new CommandHandler()
 		{
-			public void run()
+			//public void run()
+			public void execute(ReadOnlyCommandMetadata metadata, Object context)
 			{
 				if( myChangesMade )
 				{
@@ -55,7 +60,7 @@ public class RegisterDeviceScreen extends MainScreen implements FieldChangeListe
 					myChangesMade = false;
 				}
 			}
-		};
+		}));
 
 		this.myUpdateButton.setChangeListener( this );
 		this.myDeviceList.setChangeListener( this );
